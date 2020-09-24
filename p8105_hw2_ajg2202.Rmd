@@ -11,12 +11,19 @@ library(readxl)
 
 ## Problem 1
 
+First, define a path to the dataset. 
+
+```{r}
+path_to_data = "./data/Trash-Wheel-Collection-Totals-7-2020-1.xlsx"
+```
+
+
 Read the Mr. Trashwheel dataset. 
 
 ```{r}
 trashwheel_df = 
 	read_xlsx(
-		"./data/Trash-Wheel-Collection-Totals-8-6-19.xlsx",
+		path = path_to_data,
 		sheet = "Mr. Trash Wheel",
 		range = cell_cols("A:N")) %>% 
 	janitor::clean_names() %>% 
@@ -30,15 +37,15 @@ trashwheel_df =
 Read precipitation data! For 2018 and 2017. 
 
 ```{r}
-precip_2018 = 
+precip_2019 = 
 	read_excel(
-		"./data/Trash-Wheel-Collection-Totals-8-6-19.xlsx",
-		sheet = "2018 Precipitation",
+		"./data/Trash-Wheel-Collection-Totals-7-2020-1.xlsx",
+		sheet = "2019 Precipitation",
 		skip = 1
 	) %>% 
 	janitor::clean_names() %>% 
 	drop_na(month) %>% 
-	mutate(year = 2018) %>% 
+	mutate(year = 2019) %>% 
 	relocate(year)
 
 precip_2017 = 
